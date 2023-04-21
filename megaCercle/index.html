@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>megaCercle</title>
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		canvas {
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas"></canvas>
+
+	<script>
+		const canvas = document.getElementById("myCanvas");
+		const context = canvas.getContext("2d");
+
+		// Régler la taille du canvas pour remplir l'écran
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		context.beginPath();
+		context.arc(canvas.width / 2, canvas.height / 2, 50, 0, 2 * Math.PI);
+		context.stroke();
+
+		// définir le rayon du cercle central
+		const centerX = canvas.width / 2;
+		const centerY = canvas.height / 2;
+		const radius = 300;
+
+		// dessiner le cercle central
+		context.beginPath();
+		context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+		context.stroke();
+
+		// dessiner les cercles sur la circonférence du cercle central
+		for (let i = 0; i < 1024; i++) {
+			const angle = (2 * Math.PI * i) / 1024; // angle entre chaque cercle
+			const x = centerX + radius * Math.cos(angle);
+			const y = centerY + radius * Math.sin(angle);
+			const size = Math.random() * 50 + 10; // taille aléatoire entre 10 et 60 pixels
+			context.beginPath();
+			context.arc(x, y, size, 0, 2 * Math.PI);
+			context.fill();
+		}
+	</script>
+</body>
+</html>
